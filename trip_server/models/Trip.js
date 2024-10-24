@@ -3,8 +3,7 @@ const Schema = mongoose.Schema;
 
 const activitySchema = new Schema({
   time: {
-    type: Date,
-    required: true,
+    type: String,
   },
   title: {
     type: String,
@@ -15,7 +14,6 @@ const activitySchema = new Schema({
   },
   location: {
     type: String,
-    required: true,
   },
   lat: {
     type: Number,
@@ -36,7 +34,6 @@ const activitySchema = new Schema({
   },
   name: {
     type: String,
-    required: true,
   },
   isVisited: {
     type: Boolean,
@@ -69,6 +66,14 @@ const tripSchema = new Schema(
       type: String,
       required: true,
     },
+    tripduration: {
+      type: Number,
+      required: true,
+    },
+    tripStartDate: {
+      type: Date,
+      required: true,
+  },  
     tripFrom: {
       type: String,
       required: true,

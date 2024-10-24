@@ -18,6 +18,8 @@ exports.createTrip = async (req, res) => {
     const trip = new Trip({
       tripTitle: `${duration} day Trip from ${source} to ${destination}`,
       tripID: new mongoose.Types.ObjectId(),
+      tripStartDate: startDate,
+      tripduration: duration,
       tripVehicle: vehicle,
       tripFrom: source,
       tripTo: destination,
