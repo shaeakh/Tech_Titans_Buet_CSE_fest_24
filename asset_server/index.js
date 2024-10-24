@@ -7,6 +7,7 @@ const { saveImage } = require('./controllers/saveImage');
 const { getImagesByUser } = require('./controllers/getImagesByUser ');
 const { getImagesByActivity } = require('./controllers/getImagesByActivity');
 const { getImagesByTrip } = require('./controllers/getImagesByTrip');
+const { searchImage } = require('./controllers/searchImage');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -19,6 +20,7 @@ app.post('/api/save-img',saveImage);
 app.get('/api/images/user/:userID',getImagesByUser);
 app.get('/api/images/trip/:tripID' ,getImagesByTrip);
 app.get('/api/images/activity/:activityID',getImagesByActivity);
+app.post('/api/images/search',searchImage);
 
 mongoose.connect(DBURL)
     .then(() => {
