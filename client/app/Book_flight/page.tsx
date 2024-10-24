@@ -1,7 +1,12 @@
+"use client"
 import { Car, MapPin } from 'lucide-react'
 import React from 'react'
+import { useSearchParams } from "next/navigation";
 
 function page() {
+    const searchParams = useSearchParams();
+    const response = searchParams.get("response");
+    const parsedResponse = response ? JSON.parse(response) : null;
     const res = {
         "transport": {
             "vehicle": "bus",
@@ -59,18 +64,25 @@ function page() {
         "total_estimated_Cost": "$400"
     }
     return (
-        <div className='w-screen h-screen flex justify-center items-center'>
+        // <div>
+        //     <h1>Response Data:</h1>
+        //     <pre>{JSON.stringify(parsedResponse, null, 2)}</pre>
+        // </div>
+        <div className='w-screen h-screen flex flex-col justify-center items-center'>
 
-            <div className='h-min w-7/12 border-2 border-black flex flex-row items-center space-x-2 ' >
-                <div className='h-10 w-10 bg-blue-500 hover:bg-blue-700  rounded-full'></div>
+            <div className='h-min w-4/12 border-2 border-black flex flex-row items-center space-x-2 px-4 py-2 rounded-full' >
+                <div className='h-5 w-5 bg-blue-500 hover:bg-blue-700  rounded-full'></div>
                 <label 
                     htmlFor="source"
-                    className="text-lg text-2xl text-black flex items-center gap-2"
+                    className="text-xl text-black flex items-center gap-2"
                 >
-                    <Car height={50} width={50} /> Details about your vehicle 
+                    <Car height={30} width={30} /> Details about your vehicle 
                 </label>
-
+                
             </div>
+            <div > Vehicle : {"Bus"}  </div>
+            <div > Vehicle : {"duration"}  </div>
+            <div > Vehicle : {"price"}  </div>
         </div>
     )
 }

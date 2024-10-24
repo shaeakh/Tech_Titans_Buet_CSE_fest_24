@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import { MapPin, Users, DollarSign, Car } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { DatePickerWithRange } from "./DatePickerWithRange"; // Import the new DatePicker component
+import { DatePickerWithRange } from "../components/trip_planner/DatePickerWithRange"; // Import the new DatePicker component
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,6 +15,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useRouter } from "next/navigation";
 
 function Page() {
   const [Source, setSource] = useState('');
@@ -25,8 +26,9 @@ function Page() {
   const [budgetType, setbudgetType] = useState("null");
   const [person, setPerson] = useState(1);
   const [dateRange, setDateRange] = useState<{ from: Date | null; to: Date | null }>({ from: null, to: null });
+  const router = useRouter();
 
-  const handle_submit = () => {
+  const handle_submit = async () => {
     const details = {
       source: Source,
       destination: Destination,
@@ -34,20 +36,24 @@ function Page() {
       date: dateRange,
       budgetType: budgetType,
       person: person,
+      activities : [
+        "tour", 
+        "food",
+        "concert"
+      ]
     };
 
     console.log(details);
 
    
-    fetch("http://192.168.117.112:8000/v0/itineraries/generate", {
+    const res = await fetch("http://172.28.31.202:8000/v0/itineraries/generate", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(details)
     })
-      .then(response => response.json())
-      .then(data => console.log('Response:', data))
-      .catch(error => console.error('Error:', error));
-
+    const data = await res.json();
+    console.log(data);
+    router.push(`/Book_flight?response=${encodeURIComponent(JSON.stringify(data))}`);
     
 
     // Reset form fields after submission
