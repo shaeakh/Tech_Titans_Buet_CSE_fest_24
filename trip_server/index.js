@@ -5,6 +5,7 @@ dotenv.config();
 const cors = require('cors');
 const { createTrip } = require('./controllers/createTrip');
 const { createItinerary } = require('./controllers/createItinerary');
+const { getItinerary } = require('./controllers/getItinerary');
 
 const app = express();
 const PORT = process.env.PORT || 6000;
@@ -15,6 +16,7 @@ app.use(express.json());
 
 app.post('/api/create-trip',createTrip);
 app.post('/api/create-itinerary',createItinerary);
+app.get('/api/itinerary', getItinerary);
 
 mongoose.connect(DBURL)
     .then(() => {
