@@ -8,7 +8,7 @@ const { createItinerary } = require('./controllers/createItinerary');
 const { getItinerary } = require('./controllers/getItinerary');
 
 const app = express();
-const PORT = process.env.PORT || 6001;
+const PORT = process.env.PORT || 6000;
 const DBURL = process.env.DB_URL;
 
 app.use(cors());
