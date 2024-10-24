@@ -2,7 +2,7 @@
 import { NotebookPen } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
-
+import AccordionComponent from '../components/Trip_plan/AccordionComponent'
 function page() {
     return (
         <div className='h-screen w-screen flex flex-row  justify-start items-center  ' style={{
@@ -13,10 +13,21 @@ function page() {
             backgroundRepeat: 'no-repeat',
         }}>
 
-            <div className='w-2/3 h-full border-2 border-white'>a</div>
-            <div className='w-1/3 space-y-4 h-full border-2 border-white flex flex-col justify-center items-center '>
+            <div className='w-2/3 p-10 h-full space-y-5 border-2 border-white'>
+                <div className='border-2 border-black w-min bg-white whitespace-nowrap h-min  flex flex-row items-center space-x-2 px-4 py-2 rounded-full' >
+                    <div className='h-5 w-5 bg-blue-500 hover:bg-blue-700 rounded-full'></div>
+                    <label
+                        htmlFor="accommodation"
+                        className="text-xl text-black flex items-center gap-2"
+                    >
+                        <NotebookPen className='text-[#53AB8B]' height={20} width={20} /> Your Trip Itinerary in Detailed Overview
+                    </label>
+                </div>
+                <AccordionComponent />
+            </div>
+            <div className='  w-1/3 space-y-4 h-full border-2 border-white flex flex-col justify-center items-center '>
                 <div className='bg-white whitespace-nowrap h-min border-input flex flex-row items-center space-x-2 px-4 py-2 rounded-full' >
-                <div className='h-5 w-5 bg-blue-500 hover:bg-blue-700 rounded-full'></div>
+                    <div className='h-5 w-5 bg-blue-500 hover:bg-blue-700 rounded-full'></div>
                     <label
                         htmlFor="accommodation"
                         className="text-xl text-black flex items-center gap-2"
