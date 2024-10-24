@@ -38,12 +38,17 @@ function Page() {
 
     console.log(details);
 
-    fetch("http://localhost:8000/taskmaster", {
+   
+    fetch("http://192.168.117.112:8000/v0/itineraries/generate", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(details)
-    }).then(() => console.log('Details sent')
-    );
+    })
+      .then(response => response.json())
+      .then(data => console.log('Response:', data))
+      .catch(error => console.error('Error:', error));
+
+    
 
     // Reset form fields after submission
     setSource('');
@@ -65,7 +70,7 @@ function Page() {
       }}
     >
       <div>
-        
+
       </div>
       <div className='h-5/6 w-1/2 border-2 border-white bg-white rounded-xl p-10 space-y-6 shadow-2xl animate-fadeIn'>
         <h1 className='text-center text-4xl font-extrabold text-black tracking-wider mb-4'>

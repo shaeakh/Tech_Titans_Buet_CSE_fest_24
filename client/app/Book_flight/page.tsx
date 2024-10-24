@@ -61,13 +61,13 @@ function page() {
     return (
         <div className='w-screen h-screen flex justify-center items-center'>
 
-            <div className='h-min w-7/12 border-2 border-black flex flex-row items-center space-x-2' >
-                <div className='h-5 w-5 bg-blue-500 hover:bg-blue-700  rounded-full'></div>
-                <label
+            <div className='h-min w-7/12 border-2 border-black flex flex-row items-center space-x-2 ' >
+                <div className='h-10 w-10 bg-blue-500 hover:bg-blue-700  rounded-full'></div>
+                <label 
                     htmlFor="source"
-                    className="text-lg font-medium text-black flex items-center gap-2"
+                    className="text-lg text-2xl text-black flex items-center gap-2"
                 >
-                    <Car /> Details about your vehicle 
+                    <Car height={50} width={50} /> Details about your vehicle 
                 </label>
 
             </div>
