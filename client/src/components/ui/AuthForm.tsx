@@ -7,6 +7,7 @@ import { useToast } from '@/hooks/use-toast';
 
 import { Button } from "@/components/ui/button"
 
+
 export default function AuthForm({ type }:any) {
     const { toast } = useToast()
   const [formData, setFormData] = useState({
@@ -42,22 +43,31 @@ export default function AuthForm({ type }:any) {
       const response = await axios.post(endpoint, data);
 
       if ((response.status === 201 || response.status === 200)&& type==='signup') {
+        toast({
+            description: 'Successfully signed up!',
+          });
         router.push('/login'); // Redirect to home page on success
       }else   if ((response.status === 201 || response.status === 200)&& type==='login') {
+        toast({
+            description: 'Successfully logged in!',
+          });
         router.push('/'); // Redirect to home page on success
       } 
        else {
         setError(response.data.message);
       }
-    } catch (err) {
-      setError(
-        err.response?.data?.message || 'Something went wrong. Please try again.'
-      );
-    }
+    } catch (err: any) {
+        const errorMsg =
+          err.response?.data?.message || 'Something went wrong. Please try again.';
+        toast({
+          description: errorMsg,
+        });
+        setError(errorMsg);
+      }
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-900">
+    <div className="flex justify-center items-center h-screen bg-gray-50">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded shadow-md">
         <h2 className="text-2xl font-bold text-gray-900 text-center">
           {type === 'signup' ? 'Sign Up' : 'Login'}
@@ -140,23 +150,17 @@ export default function AuthForm({ type }:any) {
             </div>
           )}
 
-          <button
+          {/* <button
             type="submit"
             className="w-full py-2 mt-6 font-bold text-white bg-black rounded-md hover:bg-gray-800"
           >
             {type === 'signup' ? 'Sign Up' : 'Login'}
-          </button>
-              {/* <Button
-     
-      onClick={() => {
-        toast({
-            
-          description: "Your message has been sent.",
-        })
-      }}
-    >
+          </button> */}
+     <Button
+            onClick={handleSubmit}
+          >
    {type === 'signup' ? 'Sign Up' : 'Login'}
-    </Button> */}
+    </Button>
         </form>
       </div>
     </div>

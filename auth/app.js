@@ -7,19 +7,21 @@ const cors = require('cors');
 const express = require('express');
 const bodyParser = require('body-parser');
 const router = require('./routes/authRoute');
-
+// const hotelRouter = require('./routes/hotelRoute'); 
 const app = express();
 const DBURL = process.env.DBURL;
 
-app.use(cors());
 
+
+app.use(cors());
 app.use(express.json());
 
-
 app.use('/api/auth', router);
+// app.use('/api', hotelRouter);  // Use hotel route
 
 const PORT = process.env.PORT || 5000;
-mongoose.connect(DBURL)
+
+mongoose.connect(process.env.DBURL)
     .then(() => {
         console.log('Database connected successfully');
         app.listen(PORT, () => {
@@ -27,5 +29,5 @@ mongoose.connect(DBURL)
         });
     })
     .catch((error) => {
-        console.log('Error:', error.message);
+        console.error('Error connecting to the database:', error);
     });
