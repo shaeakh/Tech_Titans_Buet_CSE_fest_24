@@ -2,10 +2,10 @@ const Trip = require("../models/Trip");
 const mongoose = require("mongoose");
 
 exports.createTrip = async (req, res) => {
-  const { source, destination, vehicle, date, budgetType, person } = req.body;
+  const { source, destination, vehicle, date, budgetType, person, userID } = req.body;
 
   // Body validation
-  if (!source || !destination || !vehicle || !date || !budgetType || !person) {
+  if (!source || !destination || !vehicle || !date || !budgetType || !person || !userID) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
@@ -18,6 +18,7 @@ exports.createTrip = async (req, res) => {
     const trip = new Trip({
       tripTitle: `${duration} day Trip from ${source} to ${destination}`,
       tripID: new mongoose.Types.ObjectId(),
+      userID,
       tripStartDate: startDate,
       tripduration: duration,
       tripVehicle: vehicle,

@@ -6,6 +6,7 @@ const cors = require('cors');
 const { createTrip } = require('./controllers/createTrip');
 const { createItinerary } = require('./controllers/createItinerary');
 const { getItinerary } = require('./controllers/getItinerary');
+const { getTripByUserID } = require('./controllers/getTripBbyUserID');
 
 const app = express();
 const PORT = process.env.PORT || 6001;
@@ -17,6 +18,7 @@ app.use(express.json());
 app.post('/api/create-trip',createTrip);
 app.post('/api/create-itinerary',createItinerary);
 app.get('/api/itinerary', getItinerary);
+app.get('/api/trip-list',getTripByUserID);
 
 mongoose.connect(DBURL)
     .then(() => {

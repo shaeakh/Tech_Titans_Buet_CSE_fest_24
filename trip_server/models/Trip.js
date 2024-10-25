@@ -66,6 +66,10 @@ const tripSchema = new Schema(
       type: String,
       required: true,
     },
+    userID: {
+      type: String,
+      required: true,
+    },
     tripduration: {
       type: Number,
       required: true,
