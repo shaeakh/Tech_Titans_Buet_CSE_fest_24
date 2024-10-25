@@ -254,3 +254,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 --- 
 
 This README file should give a comprehensive overview of your project, including installation, features, API, and how everything fits together!
+![Screenshot (52)](https://github.com/user-attachments/assets/56d6e26b-044c-41f1-962e-1663b1478a0b)
+
+![Screenshot (54)](https://github.com/user-attachments/assets/02638b08-33d2-4151-ac79-d81205e6e98e)
+![Screenshot (55)](https://github.com/user-attachments/assets/07eae247-74af-4f81-9ea1-377d4591a3c7)
+![Screenshot (56)](https://github.com/user-attachments/assets/4dada3a3-3e4b-47be-8f60-9f7318215da8)
+
+
+
