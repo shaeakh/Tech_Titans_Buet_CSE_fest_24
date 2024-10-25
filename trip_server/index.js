@@ -10,7 +10,7 @@ const { getTripByUserID } = require('./controllers/getTripBbyUserID');
 const { toggleActivityVisited } = require('./controllers/markActivity');
 
 const app = express();
-const PORT = process.env.PORT || 6000;
+const PORT = process.env.PORT || 6001;
 const DBURL = process.env.DB_URL;
 
 app.use(cors());
