@@ -17,16 +17,18 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { CldUploadButton } from "next-cloudinary";
 
-import { CloudHail, Clock, MapPin, Sun } from 'lucide-react'
+import { UploadCloud, Pencil, CloudHail, Clock, MapPin, Sun, Fullscreen } from 'lucide-react'
 import { Button } from '@/components/ui/button';
 function AccordionComponent(props: any) {
     const [activity_done, setActivity_done] = useState<boolean[]>([]);
+    const [pic_url, setPic_url] = useState<string>('');
     useEffect(() => {
         setActivity_done(new Array(props.activities.length).fill(false));
     }, [props.activities]);
 
-    const mark_done = (index:any) => {
+    const mark_done = (index: any) => {
         // Create a new array to avoid mutation issues
         const updatedActivityDone = activity_done.map((done, i) =>
             i === index ? true : done
@@ -53,7 +55,22 @@ function AccordionComponent(props: any) {
 
         return `${day}${daySuffix(day)} ${month}, ${year}`;
     }
-    
+
+    const PicUpload = (result: any) => {
+        console.log('Upload result:', result);
+        
+        if (result?.event === 'success' && result.info?.secure_url) {
+            const uploadedURL = result.info.secure_url;
+            setPic_url(uploadedURL);
+            console.log('Image uploaded:', uploadedURL);
+        } else {
+            console.error('Upload failed or result structure is invalid:', result);
+        }
+    };
+
+
+
+
     return (
         <div className='w-full ' ><Accordion className='bg-white rounded-lg px-5 py-5' type="single" collapsible>
             <AccordionItem value="item-1">
@@ -79,12 +96,17 @@ function AccordionComponent(props: any) {
                                 <div className={`text-md ${activity_done[index] == true && 'line-through'}`}>{Activity.description}</div>
                                 <div className='flex flex-row items-center space-x-2'><Clock width={15} className='text-bold' /><div>{Activity.time}</div> < div className='h-2 w-2 bg-black rounded-full'></div><div>Duration : {Activity.duration}</div> </div>
                                 <div className='w-full flex justify-end '>
+                                    <CldUploadButton onUpload={PicUpload} className='border-2 border-input p-3 rounded-lg mx-2' uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}>Upload</CldUploadButton>
+
+                                    
                                     <AlertDialog>
                                         <AlertDialogTrigger className='bg-[#0AB06E] p-2 rounded-lg font-bold text-white'>Mark done</AlertDialogTrigger>
                                         <AlertDialogContent>
                                             <AlertDialogHeader>
                                                 <AlertDialogTitle>Do you want to add any photo ?</AlertDialogTitle>
                                                 <AlertDialogDescription>
+
+
                                                     This action cannot be undone. This will permanently delete your account
                                                     and remove your data from our servers.
                                                 </AlertDialogDescription>
