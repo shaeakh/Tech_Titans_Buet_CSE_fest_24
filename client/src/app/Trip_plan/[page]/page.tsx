@@ -2,8 +2,9 @@
 import { NotebookPen } from 'lucide-react'
 import Image from 'next/image'
 import React, { useEffect } from 'react'
-import AccordionComponent from '../components/Trip_plan/AccordionComponent'
+import AccordionComponent from '@/app/components/Trip_plan/AccordionComponent'
 import axios from 'axios'
+import { useSearchParams } from "next/navigation";
 function page() {
     interface Itinerary {
         [x: string]: any
@@ -11,17 +12,24 @@ function page() {
         tripTitle: string;
         // Add other properties if needed
     }
+    
 
+    const searchParams = useSearchParams();
+    const tripID = searchParams.get('tripID');
     const [itinerary, setItinerary] = React.useState<Itinerary | null>(null);
 
     useEffect(() => {
         const fetchItinerary = async () => {
+          console.log(tripID);
+          
             try {
-                const res = await axios.get("http://localhost:6001/api/itinerary?tripID=671a89368f917480fb7221d3");
+                const res = await axios.get(`http://172.28.31.202:6000/api/itinerary?tripID=${tripID}`);
                 if (res.status !== 200) {   
                     throw new Error(`Error: ${res.status} ${res.statusText}`);
                 }
                 setItinerary(res.data);
+                console.log('Fetched itinerary:', res.data);
+                
                 console.log('Fetched itinerary:', res.data);
             } catch (error) {
                 if (axios.isAxiosError(error)) {

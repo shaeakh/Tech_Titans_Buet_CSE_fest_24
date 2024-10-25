@@ -1,15 +1,10 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+"use client"
+import React from 'react'
 
-const Dashboard = () => {
-  const router = useRouter();
+function page() {
+  return (
+    <div className='h-screen w-screen '>page</div>
+  )
+}
 
-  useEffect(() => {
-    router.replace("/dashboard/profile");
-  }, [router]);
-
-  return null;
-};
-
-export default Dashboard;
+export default page
