@@ -95,7 +95,8 @@ const tripSchema = new Schema(
       default: 0,
     },
     tripBlogID: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Blog",
       default: null,
     },
     tripVlogUrl: {
