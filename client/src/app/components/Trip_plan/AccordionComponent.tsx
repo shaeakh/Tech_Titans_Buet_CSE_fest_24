@@ -61,12 +61,13 @@ function AccordionComponent(props: any) {
         
         if (result?.event === 'success' && result.info?.secure_url) {
             const uploadedURL = result.info.secure_url;
-            setPic_url(uploadedURL);
-            console.log('Image uploaded:', uploadedURL);
+            setPic_url(uploadedURL);  // Update the state with the uploaded URL
+            console.log('Image uploaded:', uploadedURL);  // Log the new URL directly here
         } else {
             console.error('Upload failed or result structure is invalid:', result);
         }
     };
+    
 
 
 
@@ -90,13 +91,14 @@ function AccordionComponent(props: any) {
                         <div className='w-full flex flex-col justify-between ' key={index}>
 
                             <div className='w-full rounded-lg border-2 border-input p-5'>
+                            <div>{pic_url ? <img src={pic_url} alt="Uploaded" /> : 'No image uploaded'}</div>
                                 <div className={`font-bold text-xl flex space-x-1  ${activity_done[index] == true && 'line-through'}`}>{Activity.title} <a href={`https://maps.google.com/maps?q=${Activity.lat},${Activity.long}`}><MapPin className='text-red-600' /></a> </div>
                                 <div className={`text-lg  ${activity_done[index] == true && 'line-through'}`} >Place name : {Activity.name}</div>
                                 <div className={`text-md ${activity_done[index] == true && 'line-through'}`}>Transportation : {Activity.transportation}</div>
                                 <div className={`text-md ${activity_done[index] == true && 'line-through'}`}>{Activity.description}</div>
                                 <div className='flex flex-row items-center space-x-2'><Clock width={15} className='text-bold' /><div>{Activity.time}</div> < div className='h-2 w-2 bg-black rounded-full'></div><div>Duration : {Activity.duration}</div> </div>
                                 <div className='w-full flex justify-end '>
-                                    <CldUploadButton onUpload={PicUpload} className='border-2 border-input p-3 rounded-lg mx-2' uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}>Upload</CldUploadButton>
+                                    <CldUploadButton onSuccess={PicUpload} className='border-2 border-input p-3 rounded-lg mx-2' uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}>Upload</CldUploadButton>
 
                                     
                                     <AlertDialog>
