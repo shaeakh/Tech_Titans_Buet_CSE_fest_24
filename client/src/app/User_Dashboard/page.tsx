@@ -1,36 +1,62 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import AccordionComponent from '../components/User_dashboard/AccordionComponent';
-import axios from 'axios';
 import { useRouter } from "next/navigation";
 
 function Page() {
     const router = useRouter();
+
     interface Trip {
+        tripTitle: string;
+        tripID: string;
         tripProgress: number;
-        // Add other properties of the trip object if needed
     }
 
     const [trips, setTrips] = useState<Trip[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchTrips = async () => {
-            try {
-                const res = await axios.get("http://localhost:6001/api/trip-list?userID=671a472fcd875e841377ecc0");
-                setTrips(res.data.trips);
-            } catch (error) {
-                console.error("Error fetching trip data:", error);
-            } finally {
-                setLoading(false);
+        setTrips([
+            {
+                tripTitle: "2 day Trip from Dhaka to Chittagong",
+                tripID: "671b6a5c8cadcbc8633387df",
+                tripProgress: 0
+            },
+            {
+                tripTitle: "4 day Trip from Sylhet to Chittagong",
+                tripID: "671b6a5381bc11b375f0d9ff",
+                tripProgress: 0
+            },
+            {
+                tripTitle: "4 day Trip from Sylhet to Chittagong",
+                tripID: "671b656f6e79f94805358c19",
+                tripProgress: 0
+            },
+            {
+                tripTitle: "2 day Trip from Dhaka to Chittagong",
+                tripID: "671b5291642bd5a8ba0a5583",
+                tripProgress: 0
+            },
+            {
+                tripTitle: "4 day Trip from Sylhet to Chittagong",
+                tripID: "671b003b9f2770dd2ae60a0e",
+                tripProgress: 0
+            },
+            {
+                tripTitle: "4 day Trip from Sylhet to Barisal",
+                tripID: "671ae677d82c9f088c38622c",
+                tripProgress: 0
+            },
+            {
+                tripTitle: "1 day Trip from Dhaka to Sylhet",
+                tripID: "671a7f2015c797931db80d3e",
+                tripProgress: 0
             }
-        };
-
-        fetchTrips();
+        ]);
+        setLoading(false);
     }, []);
 
-    // Filter trips based on their progress
     const p = trips.filter(trip => trip.tripProgress <= 100);
     const c = trips.filter(trip => trip.tripProgress === 100);
 
@@ -55,7 +81,7 @@ function Page() {
                 </div>
             </div>
             <div className='w-full flex flex-row justify-end p-5'>
-                <div onClick={()=>{router.push(`/trip_planner`)}} className='bg-green-500 text-white text-bg font-bold p-5 rounded-lg'>Create A new plan</div>
+                <div onClick={() => { router.push(`/trip_planner`) }} className='bg-green-500 text-white text-bg font-bold p-5 rounded-lg'>Create A new plan</div>
             </div>
 
             <div className='flex flex-row w-full p-5'>

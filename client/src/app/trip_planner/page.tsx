@@ -16,6 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useRouter } from "next/navigation";
+import axios from 'axios';
 
 function Page() {
   const [Source, setSource] = useState('');
@@ -27,7 +28,7 @@ function Page() {
   const [person, setPerson] = useState(1);
   const [dateRange, setDateRange] = useState<{ from: Date | null; to: Date | null }>({ from: null, to: null });
   const router = useRouter();
-
+  const [data,setdata] = useState('');
   const handle_submit = async () => {
     const details = {
       source: Source,
@@ -36,23 +37,23 @@ function Page() {
       date: dateRange,
       budgetType: budgetType,
       person: person,
-      activities: [
-        "tour",
-        "food",
-        "concert"
-      ]
+      userID : "671a472fcd875e841377ecc0"
     };
 
-    console.log(details);
-
-
-    const res = await fetch("http://172.28.31.202:8000/v0/itineraries/generate", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(details)
-    })
-    const data = await res.json();
+    console.log(details.date);
+    const data ='' ;
     console.log(data);
+
+    axios.post("http://localhost:6000/api/create-trip", details)
+    .then(response=>{
+      console.log(response.data);
+      setdata(response.data);
+    }).catch(err=>{
+      console.log(err);
+    }
+    )
+      
+    
     router.push(`/Book_flight?response=${encodeURIComponent(JSON.stringify(data))}`);
 
 
